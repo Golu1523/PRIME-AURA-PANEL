@@ -3,141 +3,614 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>License Portal</title>
+  <title>BALAMODSXYZ - License Activation Portal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #06b6d4;
+      --accent-indigo: #6366f1;
+      --accent-purple: #a855f7;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --success: #22c55e;
+      --success-glow: rgba(34, 197, 94, 0.2);
+      --error: #ef4444;
+      --error-glow: rgba(239, 68, 68, 0.2);
+      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     body {
-      background: linear-gradient(135deg, #0f172a, #1e1b4b);
-      height: 100vh;
+      background-color: var(--bg-dark);
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: var(--text-main);
+      overflow-x: hidden;
+      position: relative;
+      padding: 20px;
     }
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 16px;
+
+    /* Dynamic Mesh Gradient Orbs */
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 0;
+      opacity: 0.45;
+      pointer-events: none;
+      animation: floatOrb 12s infinite alternate ease-in-out;
+    }
+
+    .orb-1 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, var(--accent-indigo), var(--accent-purple));
+      top: -80px;
+      left: -80px;
+    }
+
+    .orb-2 {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, var(--accent-cyan), var(--accent-indigo));
+      bottom: -100px;
+      right: -100px;
+      animation-delay: -6s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.1); }
+    }
+
+    /* Container & Glass Card */
+    .portal-wrapper {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      max-width: 400px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      max-width: 440px;
+    }
+
+    /* Top Status Bar */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--success);
+      animation: pulseDot 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                  0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.25);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+                  0 0 30px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Brand Header */
+    .brand-header {
       text-align: center;
+      margin-bottom: 32px;
     }
-    .card h2 { font-size: 24px; margin-bottom: 8px; font-weight: 600; }
-    .card p { font-size: 13px; color: #94a3b8; margin-bottom: 24px; }
-    .input-group { margin-bottom: 16px; text-align: left; }
-    .input-group label { display: block; font-size: 12px; color: #cbd5e1; margin-bottom: 6px; }
-    .input-group input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #334155;
-      background: #0f172a;
+
+    .brand-icon-box {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+      position: relative;
+    }
+
+    .brand-icon-box::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      z-index: -1;
+      opacity: 0.6;
+      filter: blur(8px);
+    }
+
+    .brand-header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .brand-header p {
+      font-size: 14px;
+      color: var(--text-sub);
+      font-weight: 400;
+    }
+
+    /* Input Group */
+    .input-wrapper {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .input-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .input-label-row label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .paste-btn {
+      background: none;
+      border: none;
+      color: var(--accent-cyan);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+
+    .paste-btn:hover {
       color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    .input-relative {
+      position: relative;
+    }
+
+    .glow-input {
+      width: 100%;
+      padding: 16px 42px 16px 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #334155;
+      border-radius: var(--radius-md);
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 15px;
-      font-family: monospace;
+      font-weight: 600;
       text-align: center;
+      letter-spacing: 1.5px;
       outline: none;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) inset;
     }
-    .btn {
-      width: 100%;
-      padding: 12px;
+
+    .glow-input:focus {
+      border-color: var(--accent-indigo);
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2),
+                  0 4px 12px rgba(0, 0, 0, 0.3) inset;
+      color: #7dd3fc;
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
       border: none;
-      border-radius: 8px;
-      background: #6366f1;
-      color: #fff;
-      font-weight: bold;
+      color: var(--text-sub);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
       cursor: pointer;
-      transition: 0.2s;
-    }
-    .btn:hover { background: #4f46e5; }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    #msg {
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      margin-bottom: 16px;
       display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: all 0.2s;
     }
-    .glow-error { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
-    .glow-success { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+
+    .clear-btn:hover {
+      background: rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    /* Message Box */
+    #msg {
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .glow-error {
+      background: rgba(239, 68, 68, 0.12);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .glow-success {
+      background: rgba(34, 197, 94, 0.12);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    /* Activate Button */
+    .btn-action {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-action:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
+    }
+
+    .btn-action:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-action:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Result Card */
+    .result-card {
+      text-align: center;
+      padding: 10px 0;
+      animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .success-icon-badge {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 2px solid var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: var(--success);
+      box-shadow: 0 0 30px var(--success-glow);
+    }
+
+    .result-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .result-card p {
+      font-size: 14px;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+    }
+
+    .ip-lock-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #4ade80;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Footer Links */
+    .portal-footer {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .portal-footer a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .portal-footer a:hover {
+      color: #cbd5e1;
+    }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h2>ACTIVATION PORTAL</h2>
-  <p>Enter your key to activate access</p>
+  <!-- Dynamic Background Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
 
-  <div id="activateForm">
-    <div class="input-group">
-      <label>LICENSE KEY</label>
-      <input type="text" id="keyInput" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off">
+  <div class="portal-wrapper">
+    
+    <!-- Top Status Bar -->
+    <div style="text-align: center;">
+      <div class="status-badge">
+        <div class="pulse-dot"></div>
+        <span>SERVER ONLINE & READY</span>
+      </div>
     </div>
-    <div id="msg"></div>
-    <button class="btn" id="activateBtn" onclick="activateKey()">Activate Now</button>
+
+    <!-- Main Glass Card -->
+    <div class="glass-card">
+      
+      <!-- Brand Logo & Header -->
+      <div class="brand-header">
+        <div class="brand-icon-box">B</div>
+        <h1>BALAMODSXYZ</h1>
+        <p>Enter your key below to activate access</p>
+      </div>
+
+      <!-- Activation Form -->
+      <div id="activateForm">
+        <div class="input-wrapper">
+          <div class="input-label-row">
+            <label for="keyInput">License Key</label>
+            <button class="paste-btn" onclick="pasteKey()" type="button">📋 Paste Key</button>
+          </div>
+          <div class="input-relative">
+            <input 
+              type="text" 
+              id="keyInput" 
+              placeholder="BALA-XXXX-XXXX-XXXX" 
+              autocomplete="off" 
+              spellcheck="false"
+              class="glow-input"
+              oninput="handleInput(this)">
+            <button class="clear-btn" id="clearBtn" onclick="clearKey()" type="button">✕</button>
+          </div>
+        </div>
+
+        <div id="msg"></div>
+
+        <button class="btn-action" id="activateBtn" onclick="activateKey()" type="button">
+          ACTIVATE NOW
+        </button>
+      </div>
+
+      <!-- Success Result Screen -->
+      <div id="resultBox" style="display: none;">
+        <div class="result-card">
+          <div class="success-icon-badge">✓</div>
+          <h3>Key Activated!</h3>
+          <p id="successMsg">Your IP is locked. Open the game!</p>
+
+          <div class="ip-lock-pill">
+            <span>🔒</span>
+            <span>IP Locked & Secured</span>
+          </div>
+
+          <div>
+            <button class="btn-secondary" onclick="resetForm()" type="button">Activate Another Key</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Link -->
+      <div class="portal-footer">
+        <a href="http://45.196.196.121/balamods/login.php" target="_blank">
+          🔒 Admin / Reseller Login
+        </a>
+      </div>
+
+    </div>
   </div>
 
-  <div id="resultBox" style="display:none;"></div>
-</div>
+  <script>
+    const keyInput = document.getElementById('keyInput');
+    const clearBtn = document.getElementById('clearBtn');
 
-<script>
-async function activateKey() {
-  const key = document.getElementById('keyInput').value.trim().toUpperCase();
-  const msg = document.getElementById('msg');
-  const btn = document.getElementById('activateBtn');
-  const form = document.getElementById('activateForm');
-  const result = document.getElementById('resultBox');
-
-  if(!key) {
-    showMsg(msg, 'Please enter a valid key', 'error');
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = 'Verifying...';
-
-  try {
-    // Vercel Serverless Function route
-    const r = await fetch('/api/user_activate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: key })
-    });
-    
-    const d = await r.json();
-
-    if(d.status === 'ok') {
-      form.style.display = 'none';
-      result.style.display = 'block';
-      result.innerHTML = `
-        <div class="glow-success" style="padding:20px; border-radius:8px;">
-          <h3 style="margin-bottom:8px;">✓ Activated</h3>
-          <p style="font-size:13px;">${d.message || 'Access granted successfully!'}</p>
-        </div>
-      `;
-    } else {
-      showMsg(msg, d.message || 'Invalid key', 'error');
-      btn.disabled = false;
-      btn.textContent = 'Activate Now';
+    function handleInput(input) {
+      input.value = input.value.toUpperCase();
+      clearBtn.style.display = input.value.trim() ? 'flex' : 'none';
     }
-  } catch(x) {
-    showMsg(msg, 'Server connection error', 'error');
-    btn.disabled = false;
-    btn.textContent = 'Activate Now';
-  }
-}
 
-function showMsg(el, text, type) {
-  el.className = type === 'error' ? 'glow-error' : 'glow-success';
-  el.style.display = 'block';
-  el.textContent = text;
-}
-</script>
+    function clearKey() {
+      keyInput.value = '';
+      clearBtn.style.display = 'none';
+      keyInput.focus();
+    }
 
+    async function pasteKey() {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          keyInput.value = text.trim().toUpperCase();
+          clearBtn.style.display = 'flex';
+          keyInput.focus();
+        }
+      } catch (err) {
+        console.log('Clipboard access unavailable');
+      }
+    }
+
+    async function activateKey() {
+      const key = keyInput.value.trim().toUpperCase();
+      const msg = document.getElementById('msg');
+      const btn = document.getElementById('activateBtn');
+      const form = document.getElementById('activateForm');
+      const result = document.getElementById('resultBox');
+      const successMsg = document.getElementById('successMsg');
+
+      if (!key) {
+        showMsg(msg, 'Enter your license key', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'ACTIVATING...';
+
+      try {
+        const r = await fetch('/api/user_activate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: key })
+        });
+
+        const d = await r.json();
+
+        if (d.status === 'ok') {
+          form.style.display = 'none';
+          result.style.display = 'block';
+          successMsg.textContent = d.message || 'Your IP is locked. Open the game!';
+        } else {
+          showMsg(msg, d.message || 'Failed to activate', 'error');
+          btn.disabled = false;
+          btn.textContent = 'ACTIVATE NOW';
+        }
+      } catch (err) {
+        showMsg(msg, 'Connection failed', 'error');
+        btn.disabled = false;
+        btn.textContent = 'ACTIVATE NOW';
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('activateForm').style.display = 'block';
+      document.getElementById('resultBox').style.display = 'none';
+      document.getElementById('msg').style.display = 'none';
+      const btn = document.getElementById('activateBtn');
+      btn.disabled = false;
+      btn.textContent = 'ACTIVATE NOW';
+      clearKey();
+    }
+
+    function showMsg(el, text, type) {
+      el.className = type === 'error' ? 'glow-error' : 'glow-success';
+      el.style.display = 'flex';
+      el.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
+    }
+
+    // Enter key triggers activation
+    keyInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        activateKey();
+      }
+    });
+  </script>
 </body>
 </html>
