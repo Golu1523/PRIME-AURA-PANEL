@@ -254,6 +254,14 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) inset;
     }
 
+    .glow-input::placeholder {
+      color: rgba(248, 113, 113, 0.45);
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
     .glow-input:focus {
       border-color: var(--accent-red);
       background: rgba(18, 7, 10, 0.95);
@@ -447,6 +455,9 @@
         font-size: 13.5px;
         padding: 12.5px 36px 12.5px 12.5px;
       }
+      .glow-input::placeholder {
+        font-size: 12px;
+      }
       .btn-action {
         height: 44px;
         font-size: 14px;
@@ -489,7 +500,7 @@
             <input 
               type="text" 
               id="keyInput" 
-              placeholder="XXXX-XXXX-XXXX-XXXX" 
+              placeholder="ENTER YOUR KEY HERE!" 
               autocomplete="off" 
               spellcheck="false"
               class="glow-input"
