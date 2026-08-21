@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>License Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e1b4b);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      text-align: center;
+    }
+    .card h2 { font-size: 24px; margin-bottom: 8px; font-weight: 600; }
+    .card p { font-size: 13px; color: #94a3b8; margin-bottom: 24px; }
+    .input-group { margin-bottom: 16px; text-align: left; }
+    .input-group label { display: block; font-size: 12px; color: #cbd5e1; margin-bottom: 6px; }
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #38bdf8;
+      font-size: 15px;
+      font-family: monospace;
+      text-align: center;
+      outline: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #6366f1;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn:hover { background: #4f46e5; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    #msg {
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .glow-error { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    .glow-success { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>ACTIVATION PORTAL</h2>
+  <p>Enter your key to activate access</p>
+
+  <div id="activateForm">
+    <div class="input-group">
+      <label>LICENSE KEY</label>
+      <input type="text" id="keyInput" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off">
+    </div>
+    <div id="msg"></div>
+    <button class="btn" id="activateBtn" onclick="activateKey()">Activate Now</button>
+  </div>
+
+  <div id="resultBox" style="display:none;"></div>
+</div>
+
+<script>
+async function activateKey() {
+  const key = document.getElementById('keyInput').value.trim().toUpperCase();
+  const msg = document.getElementById('msg');
+  const btn = document.getElementById('activateBtn');
+  const form = document.getElementById('activateForm');
+  const result = document.getElementById('resultBox');
+
+  if(!key) {
+    showMsg(msg, 'Please enter a valid key', 'error');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Verifying...';
+
+  try {
+    // Vercel Serverless Function route
+    const r = await fetch('/api/user_activate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: key })
+    });
+    
+    const d = await r.json();
+
+    if(d.status === 'ok') {
+      form.style.display = 'none';
+      result.style.display = 'block';
+      result.innerHTML = `
+        <div class="glow-success" style="padding:20px; border-radius:8px;">
+          <h3 style="margin-bottom:8px;">✓ Activated</h3>
+          <p style="font-size:13px;">${d.message || 'Access granted successfully!'}</p>
+        </div>
+      `;
+    } else {
+      showMsg(msg, d.message || 'Invalid key', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Activate Now';
+    }
+  } catch(x) {
+    showMsg(msg, 'Server connection error', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Activate Now';
+  }
+}
+
+function showMsg(el, text, type) {
+  el.className = type === 'error' ? 'glow-error' : 'glow-success';
+  el.style.display = 'block';
+  el.textContent = text;
+}
+</script>
+
+</body>
+</html>

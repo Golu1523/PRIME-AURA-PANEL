@@ -1,0 +1,9 @@
+{
+  "name": "my-activation-portal",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "serve public"
+  }
+}
