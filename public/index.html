@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>BALAMODSXYZ - License Activation Portal</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent-cyan: #06b6d4;
-      --accent-indigo: #6366f1;
-      --accent-purple: #a855f7;
-      --accent-glow: rgba(99, 102, 241, 0.25);
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --text-muted: #64748b;
+      --bg-dark: #080304;
+      --card-bg: rgba(18, 9, 12, 0.75);
+      --card-border: rgba(239, 68, 68, 0.15);
+      --accent-red: #ef4444;
+      --accent-crimson: #dc2626;
+      --accent-darkred: #991b1b;
+      --accent-glow: rgba(239, 68, 68, 0.25);
+      --text-main: #ffffff;
+      --text-sub: #cbd5e1;
+      --text-muted: #94a3b8;
       --success: #22c55e;
       --success-glow: rgba(34, 197, 94, 0.2);
-      --error: #ef4444;
-      --error-glow: rgba(239, 68, 68, 0.2);
-      --radius-lg: 24px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
+      --error: #f87171;
+      --error-glow: rgba(239, 68, 68, 0.25);
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
     }
 
     * {
@@ -43,156 +43,156 @@
       background-color: var(--bg-dark);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       color: var(--text-main);
       overflow-x: hidden;
       position: relative;
-      padding: 20px;
+      padding: 16px;
     }
 
-    /* Dynamic Mesh Gradient Orbs */
+    /* Ambient Crimson Red Background Glows */
     .bg-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(120px);
+      filter: blur(100px);
       z-index: 0;
-      opacity: 0.45;
+      opacity: 0.4;
       pointer-events: none;
-      animation: floatOrb 12s infinite alternate ease-in-out;
+      animation: floatOrb 10s infinite alternate ease-in-out;
     }
 
     .orb-1 {
-      width: 380px;
-      height: 380px;
-      background: radial-gradient(circle, var(--accent-indigo), var(--accent-purple));
-      top: -80px;
-      left: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, var(--accent-red), var(--accent-darkred));
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .orb-2 {
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, var(--accent-cyan), var(--accent-indigo));
-      bottom: -100px;
-      right: -100px;
-      animation-delay: -6s;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, #b91c1c, #450a0a);
+      bottom: -40px;
+      right: -40px;
+      animation-delay: -5s;
     }
 
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.1); }
+      100% { transform: translate(20px, 20px) scale(1.08); }
     }
 
-    /* Container & Glass Card */
+    /* Outer Wrapper for Perfect Mobile Centering */
     .portal-wrapper {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 440px;
+      max-width: 420px;
+      margin: 0 auto;
     }
 
-    /* Top Status Bar */
+    /* Status Bar */
     .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(18, 9, 12, 0.85);
+      border: 1px solid rgba(239, 68, 68, 0.25);
       padding: 6px 14px;
       border-radius: 30px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #cbd5e1;
-      margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #fca5a5;
+      margin-bottom: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .pulse-dot {
       width: 8px;
       height: 8px;
-      background-color: var(--success);
+      background-color: var(--accent-red);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--success);
-      animation: pulseDot 1.8s infinite ease-in-out;
+      box-shadow: 0 0 10px var(--accent-red);
+      animation: pulseDot 1.6s infinite ease-in-out;
     }
 
     @keyframes pulseDot {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.6; }
+      50% { transform: scale(1.35); opacity: 0.5; }
     }
 
+    /* Glass Card */
     .glass-card {
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
-                  0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 32px 24px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6),
+                  0 0 25px rgba(239, 68, 68, 0.08) inset;
+      transition: all 0.3s ease;
     }
 
     .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.25);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
-                  0 0 30px rgba(99, 102, 241, 0.15);
+      border-color: rgba(239, 68, 68, 0.35);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7),
+                  0 0 30px rgba(239, 68, 68, 0.15);
     }
 
-    /* Brand Header */
+    /* Brand Logo & Title */
     .brand-header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
-    .brand-icon-box {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 16px;
-      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
-      border-radius: 18px;
+    .logo-container {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 14px;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      font-weight: 800;
-      color: #ffffff;
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-      position: relative;
     }
 
-    .brand-icon-box::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-      z-index: -1;
-      opacity: 0.6;
-      filter: blur(8px);
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 18px;
+      filter: drop-shadow(0 6px 16px rgba(239, 68, 68, 0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
     }
 
     .brand-header h1 {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 800;
-      letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+      letter-spacing: 0.8px;
+      color: #ffffff;
+      margin-bottom: 4px;
+      text-transform: uppercase;
     }
 
     .brand-header p {
-      font-size: 14px;
-      color: var(--text-sub);
+      font-size: 13px;
+      color: #94a3b8;
       font-weight: 400;
     }
 
-    /* Input Group */
+    /* Form & Input */
     .input-wrapper {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-align: left;
     }
 
@@ -200,33 +200,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .input-label-row label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #e2e8f0;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     .paste-btn {
-      background: none;
-      border: none;
-      color: var(--accent-cyan);
-      font-size: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      font-size: 11px;
       font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: color 0.2s;
+      transition: all 0.2s;
     }
 
     .paste-btn:hover {
-      color: #38bdf8;
-      text-decoration: underline;
+      background: rgba(239, 68, 68, 0.25);
+      color: #ffffff;
     }
 
     .input-relative {
@@ -235,38 +237,38 @@
 
     .glow-input {
       width: 100%;
-      padding: 16px 42px 16px 16px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid #334155;
+      padding: 14px 40px 14px 14px;
+      background: rgba(10, 4, 6, 0.85);
+      border: 1.5px solid #37171e;
       border-radius: var(--radius-md);
-      color: #38bdf8;
+      color: #f87171;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 14.5px;
+      font-weight: 700;
       text-align: center;
       letter-spacing: 1.5px;
       outline: none;
       text-transform: uppercase;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) inset;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) inset;
     }
 
     .glow-input:focus {
-      border-color: var(--accent-indigo);
-      background: rgba(15, 23, 42, 0.95);
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2),
-                  0 4px 12px rgba(0, 0, 0, 0.3) inset;
-      color: #7dd3fc;
+      border-color: var(--accent-red);
+      background: rgba(18, 7, 10, 0.95);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2),
+                  0 4px 10px rgba(0, 0, 0, 0.4) inset;
+      color: #fca5a5;
     }
 
     .clear-btn {
       position: absolute;
-      right: 14px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       background: rgba(255, 255, 255, 0.1);
       border: none;
-      color: var(--text-sub);
+      color: #cbd5e1;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -274,67 +276,68 @@
       display: none;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 11px;
       transition: all 0.2s;
     }
 
     .clear-btn:hover {
-      background: rgba(239, 68, 68, 0.3);
-      color: #f87171;
+      background: rgba(239, 68, 68, 0.4);
+      color: #ffffff;
     }
 
-    /* Message Box */
+    /* Error / Success Banner */
     #msg {
-      padding: 14px 16px;
+      padding: 12px 14px;
       border-radius: var(--radius-sm);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 500;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       display: none;
       align-items: center;
-      gap: 10px;
-      animation: fadeIn 0.3s ease-in-out;
+      gap: 8px;
+      animation: fadeIn 0.25s ease-in-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
+      from { opacity: 0; transform: translateY(-4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .glow-error {
-      background: rgba(239, 68, 68, 0.12);
+      background: rgba(239, 68, 68, 0.15);
       color: #fca5a5;
       border: 1px solid rgba(239, 68, 68, 0.4);
     }
 
     .glow-success {
-      background: rgba(34, 197, 94, 0.12);
+      background: rgba(34, 197, 94, 0.15);
       color: #86efac;
       border: 1px solid rgba(34, 197, 94, 0.4);
     }
 
-    /* Activate Button */
+    /* Red Accent Action Button */
     .btn-action {
       width: 100%;
-      padding: 16px;
+      height: 48px;
       border: none;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
       color: #ffffff;
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       letter-spacing: 0.5px;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
-      position: relative;
-      overflow: hidden;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .btn-action:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
-      background: linear-gradient(135deg, #4f46e5, #9333ea);
+      background: linear-gradient(135deg, #f87171, #dc2626);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5);
+      transform: translateY(-1px);
     }
 
     .btn-action:active:not(:disabled) {
@@ -344,70 +347,69 @@
     .btn-action:disabled {
       opacity: 0.65;
       cursor: not-allowed;
-      transform: none;
     }
 
-    /* Result Card */
+    /* Success Screen */
     .result-card {
       text-align: center;
-      padding: 10px 0;
-      animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 8px 0;
+      animation: zoomIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.92); }
+      from { opacity: 0; transform: scale(0.94); }
       to { opacity: 1; transform: scale(1); }
     }
 
     .success-icon-badge {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 20px;
-      background: rgba(34, 197, 94, 0.15);
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background: rgba(34, 197, 94, 0.12);
       border: 2px solid var(--success);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 34px;
+      font-size: 30px;
       color: var(--success);
-      box-shadow: 0 0 30px var(--success-glow);
+      box-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
     }
 
     .result-card h3 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .result-card p {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+      margin-bottom: 20px;
     }
 
     .ip-lock-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: rgba(34, 197, 94, 0.1);
       border: 1px solid rgba(34, 197, 94, 0.3);
       color: #4ade80;
-      padding: 10px 18px;
-      border-radius: var(--radius-sm);
-      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12.5px;
       font-weight: 600;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .btn-secondary {
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: var(--text-main);
-      padding: 12px 24px;
+      padding: 11px 20px;
       border-radius: var(--radius-sm);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
@@ -415,54 +417,82 @@
 
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.25);
     }
 
-    /* Footer Links */
+    /* Footer */
     .portal-footer {
       text-align: center;
-      margin-top: 24px;
+      margin-top: 20px;
     }
 
     .portal-footer a {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .portal-footer a:hover {
-      color: #cbd5e1;
+      color: #fca5a5;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      .glass-card {
+        padding: 24px 18px;
+        border-radius: 18px;
+      }
+      .brand-header h1 {
+        font-size: 20px;
+      }
+      .logo-container {
+        width: 68px;
+        height: 68px;
+      }
+      .glow-input {
+        font-size: 13.5px;
+        padding: 12.5px 36px 12.5px 12.5px;
+      }
+      .btn-action {
+        height: 44px;
+        font-size: 13.5px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Dynamic Background Orbs -->
+  <!-- Red Ambient Glows -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
   <div class="portal-wrapper">
     
-    <!-- Top Status Bar -->
+    <!-- Status Indicator -->
     <div style="text-align: center;">
       <div class="status-badge">
         <div class="pulse-dot"></div>
-        <span>SERVER ONLINE & READY</span>
+        <span>SYSTEM ONLINE</span>
       </div>
     </div>
 
-    <!-- Main Glass Card -->
+    <!-- Main Card -->
     <div class="glass-card">
       
-      <!-- Brand Logo & Header -->
+      <!-- Brand Logo & Title -->
       <div class="brand-header">
-        <div class="brand-icon-box">B</div>
+        <div class="logo-container">
+          <img 
+            src="https://raw.githubusercontent.com/Golu1523/Prime-Aura/main/images/logo.png" 
+            alt="BALAMODS Logo" 
+            class="logo-img"
+            onerror="this.onerror=null; this.src='https://github.com/Golu1523/Prime-Aura/raw/main/images/logo.png';">
+        </div>
         <h1>BALAMODSXYZ</h1>
-        <p>Enter your key below to activate access</p>
+        <p>Activate your license key</p>
       </div>
 
       <!-- Activation Form -->
@@ -470,7 +500,7 @@
         <div class="input-wrapper">
           <div class="input-label-row">
             <label for="keyInput">License Key</label>
-            <button class="paste-btn" onclick="pasteKey()" type="button">📋 Paste Key</button>
+            <button class="paste-btn" onclick="pasteKey()" type="button">📋 Paste</button>
           </div>
           <div class="input-relative">
             <input 
@@ -488,20 +518,20 @@
         <div id="msg"></div>
 
         <button class="btn-action" id="activateBtn" onclick="activateKey()" type="button">
-          ACTIVATE NOW
+          Activate
         </button>
       </div>
 
-      <!-- Success Result Screen -->
+      <!-- Result Screen -->
       <div id="resultBox" style="display: none;">
         <div class="result-card">
           <div class="success-icon-badge">✓</div>
-          <h3>Key Activated!</h3>
+          <h3>Activated</h3>
           <p id="successMsg">Your IP is locked. Open the game!</p>
 
           <div class="ip-lock-pill">
             <span>🔒</span>
-            <span>IP Locked & Secured</span>
+            <span>IP Locked</span>
           </div>
 
           <div>
@@ -513,7 +543,7 @@
       <!-- Footer Link -->
       <div class="portal-footer">
         <a href="http://45.196.196.121/balamods/login.php" target="_blank">
-          🔒 Admin / Reseller Login
+          Admin / Reseller Login
         </a>
       </div>
 
@@ -544,7 +574,7 @@
           keyInput.focus();
         }
       } catch (err) {
-        console.log('Clipboard access unavailable');
+        console.log('Clipboard unavailable');
       }
     }
 
@@ -562,7 +592,7 @@
       }
 
       btn.disabled = true;
-      btn.textContent = 'ACTIVATING...';
+      btn.textContent = 'Activating...';
 
       try {
         const r = await fetch('/api/user_activate', {
@@ -578,14 +608,14 @@
           result.style.display = 'block';
           successMsg.textContent = d.message || 'Your IP is locked. Open the game!';
         } else {
-          showMsg(msg, d.message || 'Failed to activate', 'error');
+          showMsg(msg, d.message || 'Failed', 'error');
           btn.disabled = false;
-          btn.textContent = 'ACTIVATE NOW';
+          btn.textContent = 'Activate';
         }
       } catch (err) {
         showMsg(msg, 'Connection failed', 'error');
         btn.disabled = false;
-        btn.textContent = 'ACTIVATE NOW';
+        btn.textContent = 'Activate';
       }
     }
 
@@ -595,7 +625,7 @@
       document.getElementById('msg').style.display = 'none';
       const btn = document.getElementById('activateBtn');
       btn.disabled = false;
-      btn.textContent = 'ACTIVATE NOW';
+      btn.textContent = 'Activate';
       clearKey();
     }
 
@@ -605,7 +635,6 @@
       el.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
     }
 
-    // Enter key triggers activation
     keyInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         activateKey();
