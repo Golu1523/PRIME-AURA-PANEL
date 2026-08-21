@@ -14,18 +14,12 @@
     :root {
       --bg-dark: #080304;
       --card-bg: rgba(18, 9, 12, 0.78);
-      --card-border: rgba(239, 68, 68, 0.18);
-      --accent-red: #ef4444;
-      --accent-crimson: #dc2626;
-      --accent-darkred: #991b1b;
-      --accent-glow: rgba(239, 68, 68, 0.25);
+      --card-border: rgba(255, 0, 0, 0.2);
+      --accent-red: #ff0000;
       --text-main: #ffffff;
       --text-sub: #cbd5e1;
       --text-muted: #94a3b8;
       --success: #22c55e;
-      --success-glow: rgba(34, 197, 94, 0.2);
-      --error: #f87171;
-      --error-glow: rgba(239, 68, 68, 0.25);
       --radius-lg: 20px;
       --radius-md: 12px;
       --radius-sm: 8px;
@@ -66,7 +60,7 @@
     .orb-1 {
       width: 320px;
       height: 320px;
-      background: radial-gradient(circle, var(--accent-red), var(--accent-darkred));
+      background: radial-gradient(circle, #ff0000, #991b1b);
       top: -50px;
       left: 50%;
       transform: translateX(-50%);
@@ -101,13 +95,13 @@
       align-items: center;
       gap: 8px;
       background: rgba(18, 9, 12, 0.85);
-      border: 1px solid rgba(239, 68, 68, 0.25);
+      border: 1px solid rgba(255, 0, 0, 0.3);
       padding: 6px 14px;
       border-radius: 30px;
       font-size: 11.5px;
       font-weight: 600;
       letter-spacing: 0.5px;
-      color: #fca5a5;
+      color: #ff4d4d;
       backdrop-filter: blur(12px);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
@@ -115,9 +109,9 @@
     .pulse-dot {
       width: 8px;
       height: 8px;
-      background-color: var(--accent-red);
+      background-color: #ff0000;
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-red);
+      box-shadow: 0 0 10px #ff0000;
       animation: pulseDot 1.6s infinite ease-in-out;
     }
 
@@ -135,7 +129,7 @@
       border-radius: var(--radius-lg);
       padding: 32px 24px;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6),
-                  0 0 25px rgba(239, 68, 68, 0.08) inset;
+                  0 0 25px rgba(255, 0, 0, 0.08) inset;
     }
 
     /* Brand Logo & Title */
@@ -151,8 +145,8 @@
       position: relative;
       border-radius: 50%;
       overflow: hidden;
-      border: 2.5px solid rgba(239, 68, 68, 0.6);
-      box-shadow: 0 0 25px rgba(239, 68, 68, 0.45);
+      border: 2.5px solid rgba(255, 0, 0, 0.6);
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -212,9 +206,9 @@
     }
 
     .paste-btn {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      color: #fca5a5;
+      background: rgba(255, 0, 0, 0.12);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      color: #ff4d4d;
       font-size: 11px;
       font-weight: 600;
       padding: 3px 8px;
@@ -227,7 +221,7 @@
     }
 
     .paste-btn:hover {
-      background: rgba(239, 68, 68, 0.25);
+      background: rgba(255, 0, 0, 0.25);
       color: #ffffff;
     }
 
@@ -241,7 +235,7 @@
       background: rgba(10, 4, 6, 0.85);
       border: 1.5px solid #37171e;
       border-radius: var(--radius-md);
-      color: #f87171;
+      color: #ffffff !important;
       font-family: 'JetBrains Mono', monospace;
       font-size: 14.5px;
       font-weight: 700;
@@ -253,7 +247,7 @@
     }
 
     .glow-input::placeholder {
-      color: rgba(248, 113, 113, 0.45);
+      color: rgba(255, 255, 255, 0.45);
       font-family: 'Outfit', sans-serif;
       font-size: 13px;
       letter-spacing: 0.5px;
@@ -261,11 +255,11 @@
     }
 
     .glow-input:focus {
-      border-color: var(--accent-red);
+      border-color: #ff0000;
       background: rgba(18, 7, 10, 0.95);
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2),
+      box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2),
                   0 4px 10px rgba(0, 0, 0, 0.4) inset;
-      color: #fca5a5;
+      color: #ffffff !important;
     }
 
     .clear-btn {
@@ -287,7 +281,7 @@
     }
 
     .clear-btn:hover {
-      background: rgba(239, 68, 68, 0.4);
+      background: rgba(255, 0, 0, 0.5);
       color: #ffffff;
     }
 
@@ -296,7 +290,7 @@
       padding: 12px 14px;
       border-radius: var(--radius-sm);
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 18px;
       display: none;
       align-items: center;
@@ -304,9 +298,11 @@
     }
 
     .glow-error {
-      background: rgba(239, 68, 68, 0.15);
-      color: #fca5a5;
-      border: 1px solid rgba(239, 68, 68, 0.4);
+      background: rgba(255, 0, 0, 0.15);
+      color: #ff0000 !important;
+      border: 1px solid #ff0000 !important;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
     }
 
     .glow-success {
@@ -315,28 +311,27 @@
       border: 1px solid rgba(34, 197, 94, 0.4);
     }
 
-    /* Normal Red Action Button */
+    /* Pure Solid Red Action Button (No gradient, no extra effects) */
     .btn-action {
       width: 100%;
       height: 48px;
       border: none;
       border-radius: var(--radius-md);
-      background: #ef4444;
-      color: #ffffff;
+      background: #ff0000 !important;
+      color: #ffffff !important;
       font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
-      transition: background-color 0.2s ease;
     }
 
     .btn-action:hover:not(:disabled),
     .btn-action:active:not(:disabled) {
-      background: #dc2626;
+      background: #cc0000 !important;
     }
 
     .btn-action:disabled {
