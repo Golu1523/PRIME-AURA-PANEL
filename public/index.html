@@ -95,7 +95,7 @@
       margin: 0 auto;
     }
 
-    /* Status Bar */
+    /* Status Bar Badge in Footer */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -108,9 +108,8 @@
       font-weight: 600;
       letter-spacing: 0.5px;
       color: #fca5a5;
-      margin-bottom: 16px;
       backdrop-filter: blur(12px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .pulse-dot {
@@ -174,12 +173,7 @@
       object-fit: contain;
       object-position: 65% 50%;
       border-radius: 50%;
-      transform: scale(1.12) translateX(3px);
-      transition: transform 0.3s ease;
-    }
-
-    .logo-container:hover .logo-img {
-      transform: scale(1.2) translateX(3px);
+      transform: scale(1.22) translateX(3px);
     }
 
     .brand-header h1 {
@@ -330,15 +324,16 @@
       border-radius: var(--radius-md);
       background: linear-gradient(135deg, #ef4444, #b91c1c);
       color: #ffffff;
-      font-size: 14.5px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
+      text-transform: uppercase;
     }
 
     .btn-action:hover:not(:disabled) {
@@ -429,18 +424,7 @@
     /* Footer */
     .portal-footer {
       text-align: center;
-      margin-top: 20px;
-    }
-
-    .portal-footer a {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .portal-footer a:hover {
-      color: #fca5a5;
+      margin-top: 24px;
     }
 
     /* Mobile Responsive Optimizations */
@@ -465,7 +449,7 @@
       }
       .btn-action {
         height: 44px;
-        font-size: 13.5px;
+        font-size: 14px;
       }
     }
   </style>
@@ -477,14 +461,6 @@
   <div class="bg-orb orb-2"></div>
 
   <div class="portal-wrapper">
-    
-    <!-- Status Indicator -->
-    <div style="text-align: center;">
-      <div class="status-badge">
-        <div class="pulse-dot"></div>
-        <span>SYSTEM ONLINE</span>
-      </div>
-    </div>
 
     <!-- Main Card -->
     <div class="glass-card">
@@ -525,7 +501,7 @@
         <div id="msg"></div>
 
         <button class="btn-action" id="activateBtn" onclick="activateKey()" type="button">
-          Activate
+          LOGIN
         </button>
       </div>
 
@@ -547,11 +523,12 @@
         </div>
       </div>
 
-      <!-- Footer Link -->
+      <!-- Footer: System Online Status Badge -->
       <div class="portal-footer">
-        <a href="http://45.196.196.121/balamods/login.php" target="_blank">
-          Admin / Reseller Login
-        </a>
+        <div class="status-badge">
+          <div class="pulse-dot"></div>
+          <span>SYSTEM ONLINE</span>
+        </div>
       </div>
 
     </div>
@@ -599,7 +576,7 @@
       }
 
       btn.disabled = true;
-      btn.textContent = 'Activating...';
+      btn.textContent = 'LOGGING IN...';
 
       try {
         const r = await fetch('/api/user_activate', {
@@ -617,12 +594,12 @@
         } else {
           showMsg(msg, d.message || 'Failed', 'error');
           btn.disabled = false;
-          btn.textContent = 'Activate';
+          btn.textContent = 'LOGIN';
         }
       } catch (err) {
         showMsg(msg, 'Connection failed', 'error');
         btn.disabled = false;
-        btn.textContent = 'Activate';
+        btn.textContent = 'LOGIN';
       }
     }
 
@@ -632,7 +609,7 @@
       document.getElementById('msg').style.display = 'none';
       const btn = document.getElementById('activateBtn');
       btn.disabled = false;
-      btn.textContent = 'Activate';
+      btn.textContent = 'LOGIN';
       clearKey();
     }
 
