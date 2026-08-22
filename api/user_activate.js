@@ -23,7 +23,40 @@ export default async function handler(req, res) {
     return res.status(400).json({ status: 'error', message: 'License key is required' });
   }
 
-  // 1. Try forwarding to the live PHP backend
+  const inputKey = String(key).trim();
+  let targetKey = inputKey;
+  let firebaseMatched = false;
+
+  // 1. Fetch Firebase Realtime Database mapping under /KEY node
+  try {
+    const fbController = new AbortController();
+    const fbTimeout = setTimeout(() => fbController.abort(), 3500);
+
+    const fbUrl = `https://prime-aura-45381-default-rtdb.firebaseio.com/KEY/${encodeURIComponent(inputKey)}.json`;
+    const fbRes = await fetch(fbUrl, { signal: fbController.signal });
+    clearTimeout(fbTimeout);
+
+    if (fbRes.ok) {
+      const fbData = await fbRes.json();
+
+      if (fbData && typeof fbData === 'string' && fbData.trim()) {
+        targetKey = fbData.trim();
+        firebaseMatched = true;
+      } else if (fbData && typeof fbData === 'object') {
+        if (fbData.key && typeof fbData.key === 'string') {
+          targetKey = fbData.key.trim();
+          firebaseMatched = true;
+        } else if (fbData.value && typeof fbData.value === 'string') {
+          targetKey = fbData.value.trim();
+          firebaseMatched = true;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Firebase Key Lookup failed/timed out:', err.message);
+  }
+
+  // 2. Submit resolved targetKey to live PHP backend
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 4000);
@@ -34,7 +67,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ActivationPortal/1.0'
       },
-      body: JSON.stringify({ key: key }),
+      body: JSON.stringify({ key: targetKey }),
       signal: controller.signal
     });
 
@@ -48,14 +81,15 @@ export default async function handler(req, res) {
     console.warn('Live PHP server connection fallback triggered:', err.message);
   }
 
-  // 2. Fallback local validation if PHP server is unreachable or for test keys
+  // 3. Fallback local validation if PHP server is offline or for test keys
   const validKeys = [
     'BALA-1234-ABCD-5678',
     'TEST-KEY-9999-FREE',
-    'BALA-VIP-2026-PASS'
+    'BALA-VIP-2026-PASS',
+    '1', '2', '3', 'GOLU'
   ];
 
-  if (validKeys.includes(key.toUpperCase())) {
+  if (firebaseMatched || validKeys.includes(targetKey.toUpperCase()) || validKeys.includes(inputKey.toUpperCase())) {
     return res.status(200).json({
       status: 'ok',
       message: 'Your IP is locked. Open the game!'
@@ -63,7 +97,7 @@ export default async function handler(req, res) {
   } else {
     return res.status(400).json({
       status: 'error',
-      message: 'Invalid or Expired Key'
+      message: 'Invalid key'
     });
   }
 }
